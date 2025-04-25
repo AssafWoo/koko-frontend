@@ -1,0 +1,67 @@
+@import '../../styles/variables.less';
+
+.tasksSection {
+  width: 100%;
+  height: 100%;
+  padding: @container-padding;
+  background: @white;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  gap: @container-gap;
+
+  .tasksGrid {
+    height: calc(100vh - @header-height - @footer-height - @container-padding * 2);
+    overflow-y: auto;
+    padding: @container-padding;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .pastTasksChip {
+    position: fixed;
+    top: @header-height + @container-padding;
+    right: @container-padding;
+    padding: @spacing-xs @spacing-md;
+    border-radius: @border-radius-lg;
+    background: @white;
+    color: @blue-dark;
+    border: 1px solid @blue-light;
+    cursor: pointer;
+    font-size: @font-size-sm;
+    z-index: 100;
+    transition: all @transition-fast;
+    box-shadow: 
+      2px 2px 4px @shadow-color,
+      -2px -2px 4px @highlight-color;
+
+    &:hover {
+      background: @blue-light;
+      color: @white;
+    }
+  }
+
+  // Desktop styles
+  @media (min-width: @breakpoint-md) {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: @desktop-container-padding;
+    box-shadow: 
+      20px 20px 60px @shadow-color,
+      -20px -20px 60px @highlight-color;
+
+    .tasksGrid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: @desktop-container-gap;
+      height: auto;
+      overflow-y: visible;
+    }
+
+    .pastTasksChip {
+      position: absolute;
+      top: -40px;
+      right: 10%;
+      padding: @desktop-spacing-xs @desktop-spacing-md;
+      font-size: @desktop-font-size-sm;
+    }
+  }
+} 

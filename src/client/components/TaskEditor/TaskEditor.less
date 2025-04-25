@@ -1,0 +1,118 @@
+@import '../../styles/variables.less';
+
+.taskEditor {
+  .modalContent {
+    background: @white;
+    border-radius: @border-radius-lg;
+    padding: @spacing-lg;
+    box-shadow: 
+      4px 4px 8px @shadow-color,
+      -4px -4px 8px @highlight-color;
+  }
+
+  .modalHeader {
+    font-size: @font-size-lg;
+    font-weight: 600;
+    color: @blue-dark;
+    margin-bottom: @spacing-lg;
+  }
+
+  .formControl {
+    margin-bottom: @spacing-md;
+
+    label {
+      display: block;
+      margin-bottom: @spacing-xs;
+      color: @blue-600;
+      font-size: @font-size-sm;
+    }
+
+    input, select {
+      width: 100%;
+      padding: @spacing-sm;
+      border-radius: @border-radius-md;
+      border: 1px solid @blue-200;
+      background: @white;
+      font-size: @font-size-base;
+      transition: all @transition-fast;
+      box-shadow: 
+        inset 2px 2px 4px @shadow-color,
+        inset -2px -2px 4px @highlight-color;
+
+      &:focus {
+        outline: none;
+        border-color: @blue-400;
+        box-shadow: 
+          inset 3px 3px 6px @shadow-color,
+          inset -3px -3px 6px @highlight-color;
+      }
+    }
+  }
+
+  .button {
+    width: 100%;
+    padding: @spacing-md;
+    border-radius: @border-radius-md;
+    background: @blue-500;
+    color: @white;
+    border: none;
+    font-size: @font-size-base;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all @transition-fast;
+    margin-top: @spacing-lg;
+    box-shadow: 
+      2px 2px 4px @shadow-color,
+      -2px -2px 4px @highlight-color;
+
+    &:hover {
+      background: @blue-600;
+      transform: translateY(-1px);
+      box-shadow: 
+        3px 3px 6px @shadow-color,
+        -3px -3px 6px @highlight-color;
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: 
+        1px 1px 2px @shadow-color,
+        -1px -1px 2px @highlight-color;
+    }
+  }
+
+  // Desktop styles
+  @media (min-width: @breakpoint-md) {
+    .modalContent {
+      padding: @desktop-spacing-lg;
+      border-radius: @desktop-border-radius-lg;
+    }
+
+    .modalHeader {
+      font-size: @desktop-font-size-lg;
+      margin-bottom: @desktop-spacing-lg;
+    }
+
+    .formControl {
+      margin-bottom: @desktop-spacing-md;
+
+      label {
+        font-size: @desktop-font-size-sm;
+        margin-bottom: @desktop-spacing-xs;
+      }
+
+      input, select {
+        padding: @desktop-spacing-sm;
+        font-size: @desktop-font-size-base;
+        border-radius: @desktop-border-radius-md;
+      }
+    }
+
+    .button {
+      padding: @desktop-spacing-md;
+      font-size: @desktop-font-size-base;
+      border-radius: @desktop-border-radius-md;
+      margin-top: @desktop-spacing-lg;
+    }
+  }
+} 

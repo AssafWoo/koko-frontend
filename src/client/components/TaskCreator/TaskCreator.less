@@ -1,0 +1,92 @@
+@import '../../styles/variables.less';
+
+.taskCreator {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: @spacing-lg;
+  margin-top: 80px; // Space for the fixed TaskFilters
+
+  .inputGroup {
+    display: flex;
+    gap: @spacing-md;
+    width: 100%;
+    align-items: center;
+  }
+
+  .input {
+    flex: 1;
+    padding: @spacing-md;
+    border-radius: @border-radius-lg;
+    background: @white;
+    border: 1px solid @blue-200;
+    font-size: @font-size-base;
+    transition: all @transition-fast;
+    box-shadow: 
+      inset 2px 2px 4px @shadow-color,
+      inset -2px -2px 4px @highlight-color;
+
+    &:focus {
+      outline: none;
+      border-color: @blue-400;
+      box-shadow: 
+        inset 3px 3px 6px @shadow-color,
+        inset -3px -3px 6px @highlight-color;
+    }
+  }
+
+  .button {
+    padding: @spacing-md @spacing-lg;
+    border-radius: @border-radius-lg;
+    background: @blue-500;
+    color: @white;
+    border: none;
+    font-size: @font-size-base;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all @transition-fast;
+    box-shadow: 
+      2px 2px 4px @shadow-color,
+      -2px -2px 4px @highlight-color;
+
+    &:hover {
+      background: @blue-600;
+      transform: translateY(-1px);
+      box-shadow: 
+        3px 3px 6px @shadow-color,
+        -3px -3px 6px @highlight-color;
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: 
+        1px 1px 2px @shadow-color,
+        -1px -1px 2px @highlight-color;
+    }
+
+    &:disabled {
+      background: @blue-300;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+  }
+
+  // Desktop styles
+  @media (min-width: @breakpoint-md) {
+    padding: @desktop-spacing-lg;
+    margin-top: 96px;
+
+    .input {
+      padding: @desktop-spacing-md;
+      font-size: @desktop-font-size-base;
+      border-radius: @desktop-border-radius-lg;
+    }
+
+    .button {
+      padding: @desktop-spacing-md @desktop-spacing-lg;
+      font-size: @desktop-font-size-base;
+      border-radius: @desktop-border-radius-lg;
+    }
+  }
+} 

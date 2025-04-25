@@ -1,0 +1,182 @@
+@import '../../styles/variables.less';
+
+.taskCard {
+  position: relative;
+  padding: @container-padding;
+  border-radius: @border-radius-lg;
+  background: @white;
+  box-shadow: 
+    inset 2px 2px 4px @shadow-color,
+    inset -2px -2px 4px @highlight-color;
+  transition: all @transition-normal;
+  cursor: pointer;
+  border: 1px solid @blue-200;
+  width: fit-content;
+  min-width: 200px;
+  max-width: 100%;
+  height:fit-content;
+  margin-bottom: @container-gap;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      inset 3px 3px 6px @shadow-color,
+      inset -3px -3px 6px @highlight-color,
+      0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 
+      inset 1px 1px 2px @shadow-color,
+      inset -1px -1px 2px @highlight-color;
+  }
+
+  .taskTitle {
+    font-size: @font-size-lg;
+    font-weight: 600;
+    color: @blue-dark;
+    margin-bottom: @spacing-sm;
+    word-break: break-word;
+  }
+
+  .taskTime {
+    font-family: @font-family;
+    font-size: @font-size-sm;
+    color: @blue-600;
+    margin-top: @spacing-xs;
+    word-break: break-word;
+  }
+
+  .taskContent {
+    width: 100%;
+    margin-top: @spacing-sm;
+    padding: @spacing-sm;
+    background: @blue-50;
+    border-radius: @border-radius-md;
+    border: 1px solid @blue-100;
+  }
+
+  .contentPreview {
+    font-family: @font-family;
+    font-size: @font-size-base;
+    color: @blue-700;
+    line-height: 1.4;
+    word-break: break-word;
+    margin-bottom: @spacing-sm;
+  }
+
+  .viewContentButton {
+    width: 100%;
+    margin-top: @spacing-sm;
+    color: @blue-600;
+    font-size: @font-size-sm;
+    padding: @spacing-xs @spacing-sm;
+    border-radius: @border-radius-sm;
+    background: @white;
+    border: 1px solid @blue-200;
+    transition: all @transition-fast;
+
+    &:hover {
+      background: @blue-50;
+      border-color: @blue-300;
+    }
+
+    &:active {
+      background: @blue-100;
+    }
+  }
+
+  .taskActions {
+    display: flex;
+    gap: @spacing-sm;
+    margin-top: @spacing-md;
+    justify-content: flex-end;
+
+    button {
+      padding: @spacing-xs;
+      font-size: @font-size-sm;
+      border-radius: @border-radius-md;
+      transition: all @transition-fast;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        transform: translateY(-1px);
+        box-shadow: 
+          2px 2px 4px @shadow-color,
+          -2px -2px 4px @highlight-color;
+      }
+
+      &:active {
+        transform: translateY(0);
+        box-shadow: none;
+      }
+    }
+  }
+
+  // Desktop styles
+  @media (min-width: @breakpoint-md) {
+    padding: @desktop-container-padding;
+    border-radius: @desktop-border-radius-lg;
+    margin-bottom: @desktop-container-gap;
+    box-shadow: 
+      inset 4px 4px 8px @shadow-color,
+      inset -4px -4px 8px @highlight-color;
+
+    &:hover {
+      box-shadow: 
+        inset 6px 6px 12px @shadow-color,
+        inset -6px -6px 12px @highlight-color,
+        0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    &:active {
+      box-shadow: 
+        inset 2px 2px 4px @shadow-color,
+        inset -2px -2px 4px @highlight-color;
+    }
+
+    .taskTitle {
+      font-size: @desktop-font-size-lg;
+      margin-bottom: @desktop-spacing-sm;
+    }
+
+    .taskTime {
+      font-size: @desktop-font-size-sm;
+      margin-top: @desktop-spacing-xs;
+    }
+
+    .taskContent {
+      margin-top: @desktop-spacing-sm;
+      padding: @desktop-spacing-sm;
+    }
+
+    .contentPreview {
+      font-size: @desktop-font-size-base;
+      margin-bottom: @desktop-spacing-sm;
+    }
+
+    .viewContentButton {
+      margin-top: @desktop-spacing-sm;
+      font-size: @desktop-font-size-sm;
+      padding: @desktop-spacing-xs @desktop-spacing-sm;
+    }
+
+    .taskActions {
+      gap: @desktop-spacing-sm;
+      margin-top: @desktop-spacing-md;
+
+      button {
+        padding: @desktop-spacing-xs;
+        font-size: @desktop-font-size-sm;
+        border-radius: @desktop-border-radius-md;
+        width: 36px;
+        height: 36px;
+      }
+    }
+  }
+} 

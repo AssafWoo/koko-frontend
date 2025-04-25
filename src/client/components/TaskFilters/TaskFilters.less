@@ -1,0 +1,56 @@
+@import '../../styles/variables.less';
+
+.timeFilters {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: @spacing-md;
+  padding: @spacing-lg;
+  background: @white;
+  z-index: 100;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 @highlight-color;
+  margin-bottom: 48px;
+
+  .filterChip {
+    padding: @spacing-sm @spacing-md;
+    border-radius: @border-radius-md;
+    background: @white;
+    color: @blue-600;
+    cursor: pointer;
+    transition: all @transition-fast;
+    font-size: @font-size-sm;
+    border: 1px solid @blue-200;
+    box-shadow: 
+      inset 1px 1px 2px @shadow-color,
+      inset -1px -1px 2px @highlight-color;
+
+    &:hover {
+      background: @blue-50;
+      transform: translateY(-1px);
+    }
+
+    &.active {
+      background: @blue-500;
+      color: @white;
+      border-color: @blue-500;
+      box-shadow: none;
+    }
+  }
+
+  // Desktop styles
+  @media (min-width: @breakpoint-md) {
+    padding: @desktop-spacing-lg;
+    gap: @desktop-spacing-md;
+    margin-bottom: 64px;
+
+    .filterChip {
+      padding: @desktop-spacing-sm @desktop-spacing-md;
+      font-size: @desktop-font-size-sm;
+      border-radius: @desktop-border-radius-md;
+    }
+  }
+} 
