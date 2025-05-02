@@ -19,7 +19,7 @@ export const selectedTaskAtom = atom((get) => {
 export const isLoadingAtom = atom(false);
 
 // Filter state atom
-export const activeFilterAtom = atom<'all' | 'active' | 'completed' | 'failed'>('all');
+export const activeFilterAtom = atom<'all' | 'pending' | 'completed' | 'deleted'>('all');
 
 // Filtered tasks atom
 export const filteredTasksAtom = atom((get) => {
@@ -27,12 +27,12 @@ export const filteredTasksAtom = atom((get) => {
   const filter = get(activeFilterAtom);
   
   switch (filter) {
-    case 'active':
-      return tasks.filter(task => task.status === 'pending' || task.status === 'running');
+    case 'pending':
+      return tasks.filter(task => task.status?.toLowerCase() === 'pending');
     case 'completed':
-      return tasks.filter(task => task.status === 'completed');
-    case 'failed':
-      return tasks.filter(task => task.status === 'failed');
+      return tasks.filter(task => task.status?.toLowerCase() === 'completed');
+    case 'deleted':
+      return tasks.filter(task => task.status?.toLowerCase() === 'deleted');
     default:
       return tasks;
   }

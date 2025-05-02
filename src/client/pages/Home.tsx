@@ -4,7 +4,6 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Box, Container, Heading, VStack, useColorModeValue, useBreakpointValue } from '@chakra-ui/react';
 import TaskCreator from '@/components/TaskCreator/TaskCreator';
 import TaskList from '@/components/TaskList/TaskList';
-import TaskFilters from '@/components/TaskFilters/TaskFilters';
 import { useAtom } from 'jotai';
 import { activeFilterAtom, tasksAtom, fetchTasks } from '@/atoms/tasks';
 import { useTaskOperations } from '@/hooks/useTaskOperations';
@@ -47,10 +46,6 @@ const Home: React.FC = () => {
     await deleteTask(taskId);
   };
 
-  const handleFilterChange = (filter: string) => {
-    setActiveFilter(filter as 'all' | 'active' | 'completed' | 'failed');
-  };
-
   if (!isAuthenticated) {
     return null;
   }
@@ -86,11 +81,6 @@ const Home: React.FC = () => {
           <TaskCreator
             onCreateTask={handleCreateTask}
             isLoading={false}
-          />
-          
-          <TaskFilters 
-            activeFilter={activeFilter}
-            onFilterChange={handleFilterChange}
           />
           
           <TaskList

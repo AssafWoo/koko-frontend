@@ -26,10 +26,7 @@ export class TaskService {
     }
 
     const data = await response.json();
-    if (!data.task) {
-      throw new Error('Invalid response format');
-    }
-    return data.task;
+    return data;
   }
 
   static async getTasks(): Promise<Task[]> {
@@ -70,10 +67,7 @@ export class TaskService {
     }
 
     const data = await response.json();
-    if (!data.task) {
-      throw new Error('Invalid response format');
-    }
-    return data.task;
+    return data;
   }
 
   static async getTask(taskId: string): Promise<Task> {
@@ -86,9 +80,6 @@ export class TaskService {
     }
 
     const data = await response.json();
-    if (!data.task) {
-      throw new Error('Invalid response format');
-    }
-    return data.task;
+    return data;
   }
 }

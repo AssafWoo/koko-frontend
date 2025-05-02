@@ -58,7 +58,21 @@ export interface Task {
     timestamp: string;
     message: string;
   }>;
-  status: 'pending' | 'running' | 'completed' | 'failed';
+  status: 'pending' | 'running' | 'completed' | 'failed' | 'deleted';
   lastExecution: number | null;
   isActive: boolean;
+  scheduledTime?: string;
+  lastRunAt?: string;
+  lastResult?: string;
+  priority?: number;
+  userId?: string;
+  updatedAt?: string;
+  user?: {
+    id: string;
+    username: string;
+    email: string;
+    name: string;
+    createdAt: string;
+    updatedAt: string;
+  };
 } 

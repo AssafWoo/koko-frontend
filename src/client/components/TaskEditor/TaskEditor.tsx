@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import type { Task } from '../../types';
+import type { Task } from '@/types';
 import './TaskEditor.less';
 
 interface TaskEditorProps {
   isOpen: boolean;
   onClose: () => void;
   task: Task;
-  onSave: (updatedTask: Task) => void;
+  onSave: (task: Task) => void;
 }
 
 const TaskEditor: React.FC<TaskEditorProps> = ({ isOpen, onClose, task, onSave }) => {
@@ -16,6 +16,28 @@ const TaskEditor: React.FC<TaskEditorProps> = ({ isOpen, onClose, task, onSave }
   const handleSave = () => {
     onSave(editedTask);
     onClose();
+  };
+
+  const handleScheduleChange = (field: string, value: string) => {
+    setEditedTask(prev => {
+      const newSchedule = {
+        ...prev.schedule,
+        [field]: value,
+      } as NonNullable<Task['schedule']>;
+
+      // Reset dependent fields when frequency changes
+      if (field === 'frequency') {
+        newSchedule.day = null;
+        newSchedule.date = null;
+        newSchedule.time = null;
+        newSchedule.interval = undefined;
+      }
+
+      return {
+        ...prev,
+        schedule: newSchedule,
+      };
+    });
   };
 
   return (
@@ -41,40 +63,41 @@ const TaskEditor: React.FC<TaskEditorProps> = ({ isOpen, onClose, task, onSave }
           <label>Schedule Type</label>
           <select
             value={editedTask.schedule?.frequency || 'once'}
-            onChange={(e) => setEditedTask({
-              ...editedTask,
-              schedule: {
-                frequency: e.target.value as 'once' | 'daily' | 'weekly' | 'monthly' | 'hourly' | 'every_x_minutes',
-                time: editedTask.schedule?.time || '',
-                day: undefined,
-                date: undefined,
-                interval: editedTask.schedule?.interval,
-              },
-            })}
+            onChange={(e) => handleScheduleChange('frequency', e.target.value)}
           >
             <option value="once">Once</option>
             <option value="daily">Daily</option>
             <option value="weekly">Weekly</option>
             <option value="monthly">Monthly</option>
-            <option value="hourly">Hourly</option>
-            <option value="every_x_minutes">Every X Minutes</option>
           </select>
         </div>
 
-        {editedTask.schedule?.frequency === 'every_x_minutes' && (
+        {editedTask.schedule?.frequency === 'weekly' && (
           <div className="formControl">
-            <label>Interval (minutes)</label>
+            <label>Day of Week</label>
+            <select
+              value={editedTask.schedule?.day || ''}
+              onChange={(e) => handleScheduleChange('day', e.target.value)}
+            >
+              <option value="">Select day</option>
+              <option value="monday">Monday</option>
+              <option value="tuesday">Tuesday</option>
+              <option value="wednesday">Wednesday</option>
+              <option value="thursday">Thursday</option>
+              <option value="friday">Friday</option>
+              <option value="saturday">Saturday</option>
+              <option value="sunday">Sunday</option>
+            </select>
+          </div>
+        )}
+
+        {(editedTask.schedule?.frequency === 'once' || editedTask.schedule?.frequency === 'monthly') && (
+          <div className="formControl">
+            <label>Date</label>
             <input
-              type="number"
-              min="1"
-              value={editedTask.schedule?.interval || 1}
-              onChange={(e) => setEditedTask({
-                ...editedTask,
-                schedule: {
-                  ...editedTask.schedule!,
-                  interval: parseInt(e.target.value),
-                },
-              })}
+              type="date"
+              value={editedTask.schedule?.date || ''}
+              onChange={(e) => handleScheduleChange('date', e.target.value)}
             />
           </div>
         )}
@@ -84,19 +107,14 @@ const TaskEditor: React.FC<TaskEditorProps> = ({ isOpen, onClose, task, onSave }
           <input
             type="time"
             value={editedTask.schedule?.time || ''}
-            onChange={(e) => setEditedTask({
-              ...editedTask,
-              schedule: {
-                ...editedTask.schedule!,
-                time: e.target.value,
-              },
-            })}
+            onChange={(e) => handleScheduleChange('time', e.target.value)}
           />
         </div>
 
-        <button className="button" onClick={handleSave}>
-          Save Changes
-        </button>
+        <div className="buttonGroup">
+          <button className="cancelButton" onClick={onClose}>Cancel</button>
+          <button className="saveButton" onClick={handleSave}>Save Changes</button>
+        </div>
       </div>
     </motion.div>
   );
